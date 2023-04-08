@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const routes = require("./Routes/ToDoRoute");
 
+require("dotenv").config();
 const app = express();
 const PORT = 3000;
 
@@ -18,10 +19,7 @@ const database = (module.exports = () => {
     useUnifiedTopology: true,
   };
   try {
-    mongoose.connect(
-      "mongodb+srv://hananazeez:rfk3PvilzO0SSPga@todo-app.phqwko5.mongodb.net/todo?retryWrites=true&w=majority",
-      connectionParams
-    );
+    mongoose.connect(process.env.MONGODB_URL, connectionParams);
     console.log("MongoDB connected Successfully");
   } catch (error) {
     console.log(error);
